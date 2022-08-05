@@ -1,7 +1,6 @@
 package com.gr0g.reminderwebservice.domain;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.domain.Persistable;
@@ -14,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Reminder{
     
     @Id
-	private UUID id;
+	private String id;
 	@PartitionKey
 	private String name;
 	private String description;
@@ -25,7 +24,7 @@ public class Reminder{
 
 	}
 
-	public Reminder(UUID id, String name, String description, LocalDate dueDate, String status) {
+	public Reminder(String id, String name, String description, LocalDate dueDate, String status) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -33,11 +32,11 @@ public class Reminder{
 		this.status = status;
 	}
 
-	public UUID getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

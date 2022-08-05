@@ -5,16 +5,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gr0g.reminderwebservice.builder.ReminderBuilder;
-import com.gr0g.reminderwebservice.domain.Reminder;
-import com.gr0g.reminderwebservice.service.IdentifierGeneratorService;
 import com.gr0g.reminderwebservice.service.ReminderService;
 
 import java.time.LocalDate;
@@ -27,11 +23,6 @@ public class ReminderController {
     @Autowired
     private ReminderService reminderService;
 
-    @Autowired
-    private IdentifierGeneratorService identifierGeneratorService;
-
-    // TODO: revert each method back to ResponseEntity<Reminder> instead of String
-
     @RequestMapping("/")
     public ResponseEntity<String> home() {
         return ResponseEntity.ok("Hello World! \n");
@@ -40,7 +31,7 @@ public class ReminderController {
     // Post request to create a new reminder
     @PostMapping("/create")
     public ResponseEntity<String> createReminder(@RequestParam String name, @RequestParam String description, @RequestParam @DateTimeFormat(pattern = "MM-dd-yyyy") LocalDate dueDate, @RequestParam String status) {
-        UUID id = identifierGeneratorService.generateID();
+        String id = UUID.randomUUID().toString();
         ReminderBuilder reminderBuilder = new ReminderBuilder(id, name, description, dueDate, status);
         return ResponseEntity.ok("Created reminder with id: " + reminderService.createReminder(reminderBuilder.buildReminder()));
     }
