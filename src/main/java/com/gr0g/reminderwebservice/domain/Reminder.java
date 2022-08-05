@@ -15,20 +15,18 @@ public class Reminder{
     
     @Id
 	private UUID id;
-	private Integer version;
 	@PartitionKey
 	private String name;
 	private String description;
 	private LocalDate dueDate;
-	private ReminderStatus status;
+	private String status;
 
 	public Reminder() {
 
 	}
 
-	public Reminder(UUID id, Integer version, String name, String description, LocalDate dueDate, ReminderStatus status) {
+	public Reminder(UUID id, String name, String description, LocalDate dueDate, String status) {
 		this.id = id;
-		this.version = version;
 		this.name = name;
 		this.description = description;
 		this.dueDate = dueDate;
@@ -41,14 +39,6 @@ public class Reminder{
 
 	public void setId(UUID id) {
 		this.id = id;
-	}
-
-	public Integer getVersion() {
-		return version;
-	}
-
-	public void setVersion(Integer version) {
-		this.version = version;
 	}
 
 	public String getName() {
@@ -75,17 +65,17 @@ public class Reminder{
 		this.dueDate = dueDate;
 	}
 
-	public ReminderStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(ReminderStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Reminder [id=%s, version=%s, name=%s, description=%s, dueDate=%s, status=%s]", 
-				id,	version, name, description, dueDate, status);
+		return String.format("Reminder [id=%s, name=%s, description=%s, dueDate=%s, status=%s]", 
+				id, name, description, dueDate, status);
 	}
 }

@@ -15,8 +15,8 @@ import reactor.core.publisher.Mono;
 @Service
 public class ReminderService {
     
-    // @Autowired
-    // private ReminderOracleRepository reminderRepository;
+    @Autowired
+    private IdentifierGeneratorService generatorService;
 
     @Autowired
     private CosmosRepository reminderRepository;
@@ -33,10 +33,9 @@ public class ReminderService {
         return "found some shit!";
     }
 
-    public String save(Reminder reminder) {
+    public UUID createReminder(Reminder reminder) {
         // return reminderRepository.save(reminder);
-
-        return "saved some shit!";
+        return generatorService.generateID();
     }
 
     public String delete(Long id) {
