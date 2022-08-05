@@ -16,23 +16,32 @@ import com.gr0g.reminderwebservice.service.ReminderService;
 @RequestMapping("/api/reminders")
 public class ReminderController {
     
-    @Autowired
-    private ReminderService reminderService;
+    // @Autowired
+    // private ReminderService reminderService;
 
-    @GetMapping("/{id")
-    // @ApiOperation(value = "Get a reminder by id")
-    public ResponseEntity<Reminder> getReminderById(@PathVariable Long id) {
-        return ResponseEntity.ok(reminderService.findById(id));
+    // TODO: revert each method back to ResponseEntity<Reminder> instead of String
+
+    @RequestMapping("/")
+    public ResponseEntity<String> home() {
+        return ResponseEntity.ok("Hello World! \n");
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Reminder> addReminder(Reminder reminder) {
-        return ResponseEntity.ok(reminderService.save(reminder));
-    }
+    // @GetMapping("/{id")
+    // // @ApiOperation(value = "Get a reminder by id")
+    // public ResponseEntity<String> getReminderById(@PathVariable Long id) {
+    //     // return ResponseEntity.ok(reminderService.findById(id));
+    //     return ResponseEntity.ok("found some shit!");
+    // }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReminder(@PathVariable Long id) {
-        reminderService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
+    // @PostMapping("/add")
+    // public ResponseEntity<String> addReminder(Reminder reminder) {
+    //     // return ResponseEntity.ok(reminderService.save(reminder));
+    //     return ResponseEntity.ok("saved some shit!");
+    // }
+
+    // @DeleteMapping("/{id}")
+    // public ResponseEntity<String> deleteReminder(@PathVariable Long id) {
+    //     reminderService.delete(id);
+    //     return ResponseEntity.noContent().build();
+    // }
 }
